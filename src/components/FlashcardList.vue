@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { supabase } from '../lib/supabase'
 
-// Define the Flashcard interface
+// Define the Flashcard looks
 interface Flashcard {
   id: string
   front: string
@@ -12,13 +12,14 @@ interface Flashcard {
 }
 
 // Reactive reference to store flashcards
-const flashcards = ref<Flashcard[]>([])
+const flashcards = ref<Flashcard[]>([]) // ref is a reactive reference so it
+                                        //  automatically updates the view when the value changes
 const error = ref('')
 
 // Function to load flashcards from the database
 const loadFlashcards = async () => {
   try {
-    // get flashcards from the 'flashcards' table in order by creation date
+    // get flashcards from the 'flashcards' table in the ordcer they were made
     const { data, error: err } = await supabase
       .from('flashcards')
       .select('*')

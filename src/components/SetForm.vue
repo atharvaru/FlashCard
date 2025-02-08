@@ -10,7 +10,6 @@ const success = ref('')
 // Funct to create a new set
 const createSet = async () => {
   try {
-    // Trim whitespace from input values
     const trimmedName = name.value.trim()
     const trimmedDescription = description.value.trim()
 
@@ -19,7 +18,7 @@ const createSet = async () => {
       throw new Error('Set name is required')
     }
 
-    // Get the user
+    // Get the user data
     const { data: { user } } = await supabase.auth.getUser()
     
     // Check if user authenticated
@@ -39,7 +38,6 @@ const createSet = async () => {
     // error if the insertion fails
     if (err) throw err
 
-    // Set success message and clear form inputs
     success.value = 'Set created successfully!'
     name.value = ''
     description.value = ''

@@ -2,38 +2,41 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
 
+// Define reactive variables for email, password, error message, and loading state
 const email = ref('')
 const password = ref('')
 const error = ref('')
 const loading = ref(false)
 
+// Function to handle sign-up form submission
 const handleSubmit = async () => {
   try {
-    loading.value = true
+    loading.value = true // Set loading state to true
     const { error: err } = await supabase.auth.signUp({
       email: email.value,
       password: password.value,
     })
-    if (err) throw err
+    if (err) throw err // Throw error if sign-up fails
   } catch (err: any) {
-    error.value = err.message
+    error.value = err.message // Set error message
   } finally {
-    loading.value = false
+    loading.value = false // Reset loading state
   }
 }
 
+// Function to handle sign-in form submission
 const handleSignIn = async () => {
   try {
-    loading.value = true
+    loading.value = true // Set loading state to true
     const { error: err } = await supabase.auth.signInWithPassword({
       email: email.value,
       password: password.value,
     })
-    if (err) throw err
+    if (err) throw err // Throw error if sign-in fails
   } catch (err: any) {
-    error.value = err.message
+    error.value = err.message // Set error message
   } finally {
-    loading.value = false
+    loading.value = false // Reset loading state
   }
 }
 </script>

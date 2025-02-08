@@ -40,7 +40,7 @@ const createFlashcard = async () => {
       throw new Error('Please select a set for this flashcard')
     }
 
-    // Get the user
+    // Get the user data
     const { data: { user } } = await supabase.auth.getUser()
     
     if (!user) {

@@ -53,6 +53,10 @@ const selectSet = async (setId: string) => {
   }
 }
 
+// loadSets when the set is created (mounted)
+onMounted(() => {
+  loadSets()
+})
 </script>
 
 <template>

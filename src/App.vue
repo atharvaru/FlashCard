@@ -6,9 +6,10 @@ import FlashcardForm from './components/FlashcardForm.vue'
 import FlashcardList from './components/FlashcardList.vue'
 import SetForm from './components/SetForm.vue'
 import SetList from './components/SetList.vue'
+import StudyView from './components/Study.vue'
 
 const session = ref(null)
-const activeTab = ref('sets') // 'sets' or 'cards'
+const activeTab = ref('sets') // 'sets', 'cards', or 'study'
 
 onMounted(() => {
   supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
@@ -58,6 +59,17 @@ const handleSignOut = async () => {
                 >
                   All Cards
                 </button>
+                <button
+                  @click="activeTab = 'study'"
+                  :class="[
+                    'px-3 py-2 rounded-md text-sm font-medium',
+                    activeTab === 'study'
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  ]"
+                >
+                  Study
+                </button>
               </div>
             </div>
             <div class="flex items-center">
@@ -80,11 +92,14 @@ const handleSignOut = async () => {
               <SetList />
             </div>
           </template>
-          <template v-else>
+          <template v-else-if="activeTab === 'cards'">
             <FlashcardForm />
             <div class="mt-8">
               <FlashcardList />
             </div>
+          </template>
+          <template v-else>
+            <StudyView />
           </template>
         </div>
       </main>
