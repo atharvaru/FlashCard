@@ -83,7 +83,7 @@ const previousCard = () => {
   }
 }
 
-// resst 
+// reset
 const resetStudy = () => {
   currentCardIndex.value = 0
   isFlipped.value = false
